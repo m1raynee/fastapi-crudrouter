@@ -139,7 +139,7 @@ class SQLAlchemyCRUDRouter(CRUDGenerator[SCHEMA]):
             try:
                 (model,) = (
                     await db.execute(
-                        select(self.db_model).where(self.db_model.id == item_id)
+                        select(self.db_model).where(getattr(self.db_model, self._pk) == item_id)
                     )
                 ).one()
             except NoResultFound:
